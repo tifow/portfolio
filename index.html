@@ -514,11 +514,10 @@
             </form>
           </div>
  -->
-          <div class="col-lg-8 mt-5 mt-lg-0">
+ <div class="col-lg-8 mt-5 mt-lg-0">
   <form action="https://formsubmit.co/maxamednor0@gmail.com" method="POST" id="contactForm">
     <!-- Disable redirect after form submission -->
     <input type="hidden" name="_redirect" value="javascript:void(0);">
-    <!-- Show a success message without redirecting -->
     <input type="hidden" name="_captcha" value="false">
 
     <div class="row">
@@ -535,13 +534,13 @@
     <div class="form-group mt-3">
       <textarea class="form-control" name="message" rows="5" id="message" placeholder="Message" required></textarea>
     </div>
-    <div class="text-center">
+    <div class="text-center my-3">
       <button type="submit" class="btn btn-primary rounded-5 p-3">Send Message</button>
     </div>
   </form>
 
   <!-- Success or error message -->
-  <div id="statusMessage" style="display: none; margin-top: 20px;"></div>
+  <div id="statusMessage" style="display: none; margin-top: 20px; padding: 15px; border-radius: 5px;"></div>
 </div>
 
 <script>
@@ -549,6 +548,7 @@
     e.preventDefault(); // Prevent default form submission behavior
 
     const form = e.target;
+    const statusMessage = document.getElementById("statusMessage");
 
     // Perform the submission using FormSubmit
     fetch(form.action, {
@@ -557,22 +557,31 @@
     })
       .then((response) => {
         if (response.ok) {
-          // Display success message
-          document.getElementById("statusMessage").style.color = "green";
-          document.getElementById("statusMessage").innerText = "Your message has been sent successfully!";
-          document.getElementById("statusMessage").style.display = "block";
+          // Update and style the success message
+          statusMessage.style.display = "block";
+          statusMessage.style.color = "#155724";
+          statusMessage.style.backgroundColor = "#d4edda";
+          statusMessage.style.border = "1px solid #c3e6cb";
+          statusMessage.innerText = "✅ Your message has been sent successfully! Thank you for contacting us.";
+
+          // Clear form inputs
+          form.reset();
         } else {
-          // Display error message
-          document.getElementById("statusMessage").style.color = "red";
-          document.getElementById("statusMessage").innerText = "Failed to send your message. Please try again later.";
-          document.getElementById("statusMessage").style.display = "block";
+          // Update and style the error message
+          statusMessage.style.display = "block";
+          statusMessage.style.color = "#721c24";
+          statusMessage.style.backgroundColor = "#f8d7da";
+          statusMessage.style.border = "1px solid #f5c6cb";
+          statusMessage.innerText = "❌ Failed to send your message. Please try again later.";
         }
       })
       .catch((error) => {
-        // Display error message in case of a network issue
-        document.getElementById("statusMessage").style.color = "red";
-        document.getElementById("statusMessage").innerText = "An error occurred. Please check your connection and try again.";
-        document.getElementById("statusMessage").style.display = "block";
+        // Handle network errors or unexpected issues
+        statusMessage.style.display = "block";
+        statusMessage.style.color = "#721c24";
+        statusMessage.style.backgroundColor = "#f8d7da";
+        statusMessage.style.border = "1px solid #f5c6cb";
+        statusMessage.innerText = "❌ An error occurred. Please check your connection and try again.";
       });
   });
 </script>

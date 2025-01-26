@@ -491,7 +491,7 @@
 
           </div>
 
-          <div class="col-lg-8 mt-5 mt-lg-0">
+<!--           <div class="col-lg-8 mt-5 mt-lg-0">
             <form action="https://formsubmit.co/maxamednor0@gmail.com" method="POST">
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -513,6 +513,69 @@
               </div>
             </form>
           </div>
+ -->
+          <div class="col-lg-8 mt-5 mt-lg-0">
+  <form action="https://formsubmit.co/maxamednor0@gmail.com" method="POST" id="contactForm">
+    <!-- Disable redirect after form submission -->
+    <input type="hidden" name="_redirect" value="javascript:void(0);">
+    <!-- Show a success message without redirecting -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+      </div>
+      <div class="col-md-6 form-group mt-3 mt-md-0">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+      </div>
+    </div>
+    <div class="form-group mt-3">
+      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+    </div>
+    <div class="form-group mt-3">
+      <textarea class="form-control" name="message" rows="5" id="message" placeholder="Message" required></textarea>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary rounded-5 p-3">Send Message</button>
+    </div>
+  </form>
+
+  <!-- Success or error message -->
+  <div id="statusMessage" style="display: none; margin-top: 20px;"></div>
+</div>
+
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    const form = e.target;
+
+    // Perform the submission using FormSubmit
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Display success message
+          document.getElementById("statusMessage").style.color = "green";
+          document.getElementById("statusMessage").innerText = "Your message has been sent successfully!";
+          document.getElementById("statusMessage").style.display = "block";
+        } else {
+          // Display error message
+          document.getElementById("statusMessage").style.color = "red";
+          document.getElementById("statusMessage").innerText = "Failed to send your message. Please try again later.";
+          document.getElementById("statusMessage").style.display = "block";
+        }
+      })
+      .catch((error) => {
+        // Display error message in case of a network issue
+        document.getElementById("statusMessage").style.color = "red";
+        document.getElementById("statusMessage").innerText = "An error occurred. Please check your connection and try again.";
+        document.getElementById("statusMessage").style.display = "block";
+      });
+  });
+</script>
 
 
         </div>
